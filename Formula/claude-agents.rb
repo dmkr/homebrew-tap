@@ -1,8 +1,8 @@
 class ClaudeAgents < Formula
   desc "Local multi-agent dev setup: AI code review, test guardian, and PR-lesson mining"
   homepage "https://github.com/dmkr/claude-dev-agents"
-  url "https://github.com/dmkr/claude-dev-agents/archive/refs/tags/v1.0.0.tar.gz"
-  sha256 "f8a1af26d2c2e2b5e1e198b374c39605b7e704b3ad51873558fb8cb577d16731"
+  url "https://github.com/dmkr/claude-dev-agents/archive/refs/tags/v1.0.2.tar.gz"
+  sha256 "2ae1d786044ab4ec63d5017a84122ddec5baab3eaf28852e286a2a68b1f0d4dc"
   license "MIT"
 
   depends_on "gh"
@@ -10,10 +10,11 @@ class ClaudeAgents < Formula
   depends_on :macos
 
   def install
+    # Everything lands flat in libexec: the CLI resolves its data files and its
+    # helper scripts relative to its own real path, so they must be siblings.
     libexec.install Dir["libexec/*"]
-    prefix.install "CLAUDE.md"
-    prefix.install "com.user.mine-all-repos.plist"
-    bin.install "claude-agents"
+    libexec.install "CLAUDE.md", "com.user.mine-all-repos.plist", "claude-agents"
+    bin.install_symlink libexec/"claude-agents"
   end
 
   def caveats
@@ -29,6 +30,10 @@ class ClaudeAgents < Formula
 
       Check health any time with:
         claude-agents status
+
+      Note: repo hooks are symlinked into this formula's libexec, so after
+        brew update && brew upgrade claude-agents
+      re-run 'claude-agents install' in each repo to re-point them.
     EOS
   end
 
