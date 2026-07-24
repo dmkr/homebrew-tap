@@ -1,8 +1,8 @@
 class ClaudeAgents < Formula
   desc "Local multi-agent dev setup: AI code review, test guardian, and PR-lesson mining"
   homepage "https://github.com/dmkr/claude-dev-agents"
-  url "https://github.com/dmkr/claude-dev-agents/archive/refs/tags/v1.0.2.tar.gz"
-  sha256 "2ae1d786044ab4ec63d5017a84122ddec5baab3eaf28852e286a2a68b1f0d4dc"
+  url "https://github.com/dmkr/claude-dev-agents/archive/refs/tags/v1.0.3.tar.gz"
+  sha256 "f48e0df72b668912bda5ca273e97b195c2ff252eb373bb4359f7b74696de9544"
   license "MIT"
 
   depends_on "gh"
